@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!-- 主题色-->
+    <color name="theme_color">#278fe3</color>
+
+    <color name="background">#f3f3f3</color>
+
+    <!-- 应用框架用 相关颜色  -->
+    <color name="actionbar_bg_color_pressed">#4f000000</color><!-- 半透明 -->
+    <color name="default_split_line_color">#ffdddddd</color>
+    <color name="default_list_divider_color">#ffdddddd</color>
+    <color name="default_theme_text_color">#ff3e94da</color>
+    <color name="white">#ffffff</color><!--白色 -->
+    <color name="black">#000000</color>
+</resources>

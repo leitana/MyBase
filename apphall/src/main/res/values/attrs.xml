@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="normalDrawableSrc" format="reference" />
+    <attr name="selectDrawableSrc" format="reference" />
+    <attr name="normalTextColor" format="color" />
+    <attr name="selectTextColor" format="color" />
+    <attr name="text" format="string" />
+    <attr name="textSize" format="dimension" />
+
+    <attr name="titleText" format="string" />
+    <attr name="titleTextColor" format="color" />
+    <attr name="titleTextSize" format="dimension" />
+    
+    <attr name="image" format="reference" />
+    <attr name="imageScaleType" >
+        <enum name="fillXY" value="0" />
+        <enum name="center" value="1" />
+    </attr>
+
+    <declare-styleable name="ShadeTabView">
+        <attr name="normalDrawableSrc" />
+        <attr name="selectDrawableSrc" />
+        <attr name="normalTextColor" />
+        <attr name="selectTextColor" />
+        <attr name="text" />
+        <attr name="textSize" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomTitleView">
+        <attr name="titleText" />
+        <attr name="titleTextColor" />
+        <attr name="titleTextSize" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomImageView">
+        <attr name="titleText" />
+        <attr name="titleTextSize" />
+        <attr name="titleTextColor" />
+        <attr name="image" />
+        <attr name="imageScaleType" />
+    </declare-styleable>
+    
+</resources>

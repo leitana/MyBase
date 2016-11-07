@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="lx.base.apphall">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".login.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".gridview.GridActivity"/>
+        <activity android:name=".permission.PermissionpicActivity"/>
+        <activity android:name=".permission.ShowPicActivity"/>
+        <activity android:name="lx_base.mybase.common.base.PermissionsActivity"/>
+        <activity android:name=".recyclierview.RecyclerViewActivity"/>
+        <activity android:name=".viewpager_fragment.FragActivity"/>
+        <activity android:name=".viewpager_fragment.TabFragActy"/>
+        <activity android:name=".viewpager_fragment.DiyTabActy"/>
+        <activity android:name=".viewpager_fragment.BottomFragActy"/>
+        <activity android:name=".login.Splash"/>
+        <activity android:name=".callback.Test"/>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".listview.NewsActivity"/>
+        <activity android:name=".mvp_test.view.UserActivity"/>
+        <activity android:name=".listview.sample_news.view.NewsView"/>
+        <activity android:name=".custom_view.ViewActivity"/>
+        <activity android:name=".popwindow.PopWindowActivity"/>
+        <activity android:name=".progress.Progress"/>
+        <activity android:name=".custom_view.search_view.SearchViewActivity"/>
+        <activity android:name=".qr_code.QrCodeActivity"/>
+        <activity android:name=".timepicker.TimePickerActivity"/>
+        <activity android:name=".recyclierview.RecyclerMainActivity"/>
+        <activity android:name=".recyclierview.RecyclerListActivity"/>
+        <activity android:name=".rxjava.RxJavaTestActivity"/>
+    </application>
+
+</manifest>

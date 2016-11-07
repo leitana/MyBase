@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </android.support.v4.view.ViewPager>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cut_off_line_height"
+        android:background="@color/default_split_line_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="#fffcfcfc"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <lx.base.apphall.widgets.ShadeTabView
+            android:id="@+id/id_indicator_home"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            tab:normalDrawableSrc="@drawable/tab_home_bg"
+            tab:normalTextColor="#ff999999"
+            tab:selectDrawableSrc="@mipmap/ic_tab_home_pressed"
+            tab:selectTextColor="@color/theme_color"
+            tab:text="主页"
+            tab:textSize="10sp">
+        </lx.base.apphall.widgets.ShadeTabView>
+        <lx.base.apphall.widgets.ShadeTabView
+            android:id="@+id/id_indicator_message"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            tab:normalDrawableSrc="@drawable/tab_message_bg"
+            tab:normalTextColor="#ff999999"
+            tab:selectDrawableSrc="@mipmap/ic_tab_workbook_pressed"
+            tab:selectTextColor="@color/theme_color"
+            tab:text="便签"
+            tab:textSize="10sp" />
+
+        <lx.base.apphall.widgets.ShadeTabView
+            android:id="@+id/id_indicator_guide"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            tab:normalDrawableSrc="@drawable/tab_guidance_bg"
+            tab:normalTextColor="#ff999999"
+            tab:selectDrawableSrc="@mipmap/ic_tab_query_grade_pressed"
+            tab:selectTextColor="@color/theme_color"
+            tab:text="搜索"
+            tab:textSize="10sp" />
+
+        <lx.base.apphall.widgets.ShadeTabView
+            android:id="@+id/id_indicator_user"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            tab:normalDrawableSrc="@drawable/tab_user_bg"
+            tab:normalTextColor="#ff999999"
+            tab:selectDrawableSrc="@mipmap/ic_tab_me_pressed"
+            tab:selectTextColor="@color/theme_color"
+            tab:text="我的"
+            tab:textSize="10sp" />
+    </LinearLayout>
+</LinearLayout>
