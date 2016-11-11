@@ -70,6 +70,16 @@ public class LoginActivity extends BaseActionBarActivity {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
+                /**
+                 * 弹出软键盘光标放最后
+                 */
+//                etUsername.setFocusable(true);
+//                etUsername.setFocusableInTouchMode(true);
+//                etUsername.requestFocus();
+//                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.showSoftInput(etUsername, InputMethodManager.RESULT_SHOWN);
+//                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+//                etUsername.setSelection(etUsername.getText().length());
             }
         });
     }
