@@ -70,9 +70,9 @@ public class LoginActivity extends BaseActionBarActivity {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
-                /**
-                 * 弹出软键盘光标放最后
-                 */
+//                /**
+//                 * 弹出软键盘光标放最后
+//                 */
 //                etUsername.setFocusable(true);
 //                etUsername.setFocusableInTouchMode(true);
 //                etUsername.requestFocus();
