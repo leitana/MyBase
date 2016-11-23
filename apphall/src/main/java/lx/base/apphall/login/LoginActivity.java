@@ -1,5 +1,6 @@
 package lx.base.apphall.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -46,6 +47,7 @@ public class LoginActivity extends BaseActionBarActivity {
     @BindView(R.id.bt_login)
     Button login;
     private View mRootView;
+    private Context context = LoginActivity.this;
 
     @Override
     protected View setMyContentView() {
@@ -80,6 +82,7 @@ public class LoginActivity extends BaseActionBarActivity {
 //                imm.showSoftInput(etUsername, InputMethodManager.RESULT_SHOWN);
 //                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 //                etUsername.setSelection(etUsername.getText().length());
+
             }
         });
     }

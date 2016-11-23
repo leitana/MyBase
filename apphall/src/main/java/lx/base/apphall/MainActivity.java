@@ -20,15 +20,12 @@ import lx.base.apphall.progress.Progress;
 import lx.base.apphall.qr_code.QrCodeActivity;
 import lx.base.apphall.recyclierview.RecyclerMainActivity;
 import lx.base.apphall.rxjava.RxJavaTestActivity;
+import lx.base.apphall.sweet_alert_dialog.DialogMainActivity;
 import lx.base.apphall.timepicker.TimePickerActivity;
 import lx.base.apphall.viewpager_fragment.FragActivity;
 import lx_base.mybase.common.base.BaseActionBarActivity;
 
 public class MainActivity extends BaseActionBarActivity implements View.OnClickListener{
-    private View mRootView;
-    private int ranColor;
-    private TextView grid;
-    private Random mRandom;
     @BindView(R.id.permission)
     TextView permission;
     @BindView(R.id.recyclerView)
@@ -55,7 +52,12 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
     TextView timepicker;
     @BindView(R.id.rxjava)
     TextView rxjava;
-
+    @BindView(R.id.sweetalert)
+    TextView sweetalert;
+    private View mRootView;
+    private int ranColor;
+    private TextView grid;
+    private Random mRandom;
 
     @Override
     protected View setMyContentView() {
@@ -90,6 +92,7 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
         qrCode.setOnClickListener(this);
         timepicker.setOnClickListener(this);
         rxjava.setOnClickListener(this);
+        sweetalert.setOnClickListener(this);
     }
 
     @Override
@@ -150,6 +153,10 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
                 break;
             case R.id.rxjava:
                 intent.setClass(MainActivity.this, RxJavaTestActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.sweetalert:
+                intent.setClass(MainActivity.this, DialogMainActivity.class);
                 startActivity(intent);
                 break;
             default:

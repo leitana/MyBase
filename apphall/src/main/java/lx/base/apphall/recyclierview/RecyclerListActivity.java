@@ -41,6 +41,32 @@ public class RecyclerListActivity extends BaseActionBarActivity implements Swipe
     private RecyclerAdapter mAdapter;
 
     private List<JockContent> mData;
+    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+        private int lastVisibleItem;
+
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            if (newState == RecyclerView.SCROLL_STATE_IDLE
+                    && lastVisibleItem + 1 == mAdapter.getItemCount()
+                    && mAdapter.isShowFooter()) {
+                currentpage = currentpage + 1;
+                getData(currentpage);
+            }
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+        }
+    };
+    private RecyclerAdapter.OnItemClickListener onItemClickListener = new RecyclerAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(View view, int position) {
+            showToast(position + "");
+        }
+    };
 
     @Override
     protected View setMyContentView() {
@@ -76,33 +102,6 @@ public class RecyclerListActivity extends BaseActionBarActivity implements Swipe
         onRefresh();
     }
 
-    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
-        private int lastVisibleItem;
-        @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            super.onScrollStateChanged(recyclerView, newState);
-            if (newState == RecyclerView.SCROLL_STATE_IDLE
-                    && lastVisibleItem + 1 == mAdapter.getItemCount()
-                    && mAdapter.isShowFooter()) {
-                currentpage = currentpage + 1;
-                getData(currentpage);
-            }
-        }
-
-        @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            super.onScrolled(recyclerView, dx, dy);
-            lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
-        }
-    };
-
-    private RecyclerAdapter.OnItemClickListener onItemClickListener = new RecyclerAdapter.OnItemClickListener() {
-        @Override
-        public void onItemClick(View view, int position) {
-            showToast(position + "");
-        }
-    };
-
     private void getData(int page) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://apis.baidu.com/showapi_open_bus/showapi_joke/")
@@ -124,7 +123,7 @@ public class RecyclerListActivity extends BaseActionBarActivity implements Swipe
 
                     @Override
                     public void onError(Throwable e) {
-                        Logger.d("onError----------------" + Thread.currentThread().getName());
+                        Logger.d("onError----------------" + Thread.currentThread().getName() + e.getMessage());
                         showToast("加载失败");
                         if (mSwipeRefreshWidget.isRefreshing()) {
                             mSwipeRefreshWidget.setRefreshing(false);
