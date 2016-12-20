@@ -8,6 +8,7 @@ import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import lx.base.apphall.canvas.CanvasActivity;
 import lx.base.apphall.custom_view.ViewActivity;
 import lx.base.apphall.custom_view.search_view.SearchViewActivity;
 import lx.base.apphall.gridview.GridActivity;
@@ -54,6 +55,8 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
     TextView rxjava;
     @BindView(R.id.sweetalert)
     TextView sweetalert;
+    @BindView(R.id.canvas)
+    TextView canvas;
     private View mRootView;
     private int ranColor;
     private TextView grid;
@@ -93,6 +96,7 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
         timepicker.setOnClickListener(this);
         rxjava.setOnClickListener(this);
         sweetalert.setOnClickListener(this);
+        canvas.setOnClickListener(this);
     }
 
     @Override
@@ -157,6 +161,10 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
                 break;
             case R.id.sweetalert:
                 intent.setClass(MainActivity.this, DialogMainActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.canvas:
+                intent.setClass(MainActivity.this, CanvasActivity.class);
                 startActivity(intent);
                 break;
             default:

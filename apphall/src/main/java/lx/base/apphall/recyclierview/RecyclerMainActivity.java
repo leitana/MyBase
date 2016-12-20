@@ -18,13 +18,19 @@ import lx_base.mybase.common.base.BaseActionBarActivity;
 public class RecyclerMainActivity extends BaseActionBarActivity {
     @BindView(R.id.simple)
     TextView simple;
-    @BindView(R.id.test)
-    TextView test;
+    @BindView(R.id.swipe)
+    TextView swipe;
     private View mRootView;
 
     @OnClick(R.id.simple)
     public void onClicksimple() {
         Intent intent = new Intent(this, RecyclerListActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.swipe)
+    public void onClickSwipe() {
+        Intent intent = new Intent(this, SwipeRecyclerAvtivity.class);
         startActivity(intent);
     }
 

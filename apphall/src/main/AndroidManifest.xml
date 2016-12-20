@@ -44,6 +44,12 @@
         <activity android:name=".recyclierview.RecyclerListActivity"/>
         <activity android:name=".rxjava.RxJavaTestActivity"/>
         <activity android:name=".sweet_alert_dialog.DialogMainActivity" />
+        <activity android:name=".recyclierview.SwipeRecyclerAvtivity" />
+        <activity android:name=".canvas.CanvasActivity" />
+        <activity android:name=".canvas.PieActivity" />
+        <activity android:name=".canvas.TranslateActivity" />
+        <activity android:name=".canvas.TopoActivity" />
+        <activity android:name=".viewgroup.TestViewGroupActivity1" />
     </application>
 
 </manifest>
