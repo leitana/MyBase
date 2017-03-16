@@ -28,15 +28,14 @@ import lx_base.mybase.common.widgets.pull_refresh.PullToRefreshListView;
  */
 public class NewsActivity extends BaseActionBarActivity {
 
-    private String httpUrl = "http://apis.baidu.com/showapi_open_bus/showapi_joke/joke_text";
-    private String httpArg = "page=";
-    private String Url;
-    private int mRequestTotal = 0;
-    private int mCurrentPage = 1;
-
     @BindView(R.id.lv_news)
     PullToRefreshListView mListView;
-
+    private String httpUrl = "http://v.juhe.cn/joke/randJoke.php";
+    private String httpArg = "page=";
+    private String key = "6ca96a33f79dd59f6e66cfd507c6352b";
+    private String Url;//请求组合完成
+    private int mRequestTotal = 0;
+    private int mCurrentPage = 1;
     private View mRootView;
     private List<JockContent> mData;
     private MyAdapter mAdapter;
@@ -91,8 +90,8 @@ public class NewsActivity extends BaseActionBarActivity {
             @Override
             public void onSuccess(String response) {
                 JockerResponse jockerResponse = gson.fromJson(response, JockerResponse.class);
-                mData.addAll(jockerResponse.getShowapi_res_body().getContentlist());
-                mRequestTotal = Integer.parseInt(jockerResponse.getShowapi_res_body().getAllNum());
+                mData.addAll(jockerResponse.getResult().getData());
+//                mRequestTotal = Integer.parseInt(jockerResponse.getShowapi_res_body().getAllNum());
                 mAdapter.notifyDataSetChanged();
                 mListView.onPullDownRefreshComplete();
                 mListView.onPullUpRefreshComplete();
@@ -136,8 +135,8 @@ public class NewsActivity extends BaseActionBarActivity {
             }
             TextView title = obtainViewFromViewHolder(convertView, R.id.title);
             TextView context = obtainViewFromViewHolder(convertView, R.id.context);
-            title.setText(content.getTitle());
-            context.setText(Html.fromHtml(content.getText()));
+//            title.setText(content.getTitle());
+            context.setText(Html.fromHtml(content.getContent()));
             return convertView;
         }
     }

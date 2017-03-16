@@ -1,6 +1,7 @@
 package lx.base.apphall.rxjava;
 
 import android.os.Environment;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class RxJavaTestActivity extends BaseActionBarActivity {
     protected void initParm() {
         super.initParm();
         mData = new ArrayList<String>();
-        path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/LoveWallpaper/save/";
+        path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/Camera/";
     }
 
     @Override
@@ -80,7 +81,7 @@ public class RxJavaTestActivity extends BaseActionBarActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<String>>() {
                     @Override
-                        public void onCompleted() {
+                    public void onCompleted() {
                         Logger.d("加载完成");
                     }
 
@@ -92,10 +93,19 @@ public class RxJavaTestActivity extends BaseActionBarActivity {
                     @Override
                     public void onNext(List<String> s) {
                         Logger.d("onNext");
-                        mAdapter = new MyAdapter(s);
-                        albm.setAdapter(mAdapter);
+                        if (s.size() > 0) {
+                            mAdapter = new MyAdapter(s);
+                            albm.setAdapter(mAdapter);
+                        } else {
+                            Snackbar.make(mRootView, "无数据", Snackbar.LENGTH_SHORT).show();
+                        }
+
                     }
                 });
+    }
+
+    private static class ViewHolder {
+        ImageView imageView;
     }
 
     public class MyAdapter extends BaseAdapter {
@@ -135,9 +145,6 @@ public class RxJavaTestActivity extends BaseActionBarActivity {
             ImageLoaderUtils.display(RxJavaTestActivity.this, viewholder.imageView, data.get(position));
             return convertView;
         }
-    }
-    private static class ViewHolder{
-        ImageView imageView;
     }
 
 }

@@ -104,12 +104,12 @@ public class RecyclerListActivity extends BaseActionBarActivity implements Swipe
 
     private void getData(int page) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://apis.baidu.com/showapi_open_bus/showapi_joke/")
+                .baseUrl("http://japi.juhe.cn/joke/content/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         ReMovieService service = retrofit.create(ReMovieService.class);
-        service.getJock(page)
+        service.getJock("6ca96a33f79dd59f6e66cfd507c6352b", page, 20)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<JockerResponse>() {
@@ -137,7 +137,7 @@ public class RecyclerListActivity extends BaseActionBarActivity implements Swipe
                         if(mData == null) {
                             mData = new ArrayList<JockContent>();
                         }
-                        mData.addAll(jockerResponse.getShowapi_res_body().getContentlist());
+                        mData.addAll(jockerResponse.getResult().getData());
                         mAdapter.notifyDataSetChanged();
                     }
                 });

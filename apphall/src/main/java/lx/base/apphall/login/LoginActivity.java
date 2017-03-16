@@ -65,7 +65,7 @@ public class LoginActivity extends BaseActionBarActivity {
         etPassword.setSelection(etPassword.getText().toString().length());
         clear();
         hidePassword();
-        check();
+        check("123As-ad");
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,8 +123,9 @@ public class LoginActivity extends BaseActionBarActivity {
             }
         });
     }
-    private void check() {
-        String str = "123qe;/.DA";
+
+    private boolean check(String test) {
+        String str = test;
         /**
          * 正则表达式：(?=pattern)在任何匹配pattern的地方开始查找
          * (?=.*?[A-Z])：表示必须要有大写字母
@@ -132,14 +133,16 @@ public class LoginActivity extends BaseActionBarActivity {
          * (?=.*?[\x21-\x7e])：必须包含特殊字符
          * [a-zA-Z0-9\x21-\x7e]：表示可以包含字母，数字，特殊字符
          * {10,}：表示要大于或等于10位
+         * .*?[^a-zA-Z\\d]+.*?
          */
-        String pattern = "^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[\\x21-\\x7e])[a-zA-Z0-9\\x21-\\x7e]{10,}$";
-
+//        String pattern = "^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[\\x21-\\x7e])[a-zA-Z0-9\\x21-\\x7e]{10,}$";
+        String pattern = "^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^a-zA-Z\\d]+.*?)[a-zA-Z0-9\\x21-\\x7E]{8,}$";
         Pattern r = Pattern.compile(pattern);
         Matcher m = r.matcher(str);
         etUsername.setText(m.matches() + "");
         System.out.println(m.matches());
         Logger.d(m.matches());
+        return m.matches();
     }
 
 }

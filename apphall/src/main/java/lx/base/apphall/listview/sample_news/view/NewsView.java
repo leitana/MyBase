@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -132,8 +133,10 @@ public class NewsView extends BaseActionBarActivity implements INewsView {
             }
             TextView title = obtainViewFromViewHolder(convertView, R.id.title);
             TextView context = obtainViewFromViewHolder(convertView, R.id.context);
-            title.setText(content.getTitle());
-            context.setText(Html.fromHtml(content.getText()));
+            ImageView image = obtainViewFromViewHolder(convertView, R.id.iv_image);
+            title.setText(content.getContent());
+            context.setText(Html.fromHtml(content.getContent()));
+//            ImageLoaderUtils.display(NewsView.this, image, content.getUrl());
             return convertView;
         }
     }

@@ -62,8 +62,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ItemViewHolder) {
             if (mData != null && mData.size() > 0) {
-                ((ItemViewHolder)holder).textView1.setText(mData.get(position).getText());
-                ((ItemViewHolder)holder).title.setText(mData.get(position).getTitle());
+//                ((ItemViewHolder)holder).textView1.setText(mData.get(position).getContent());
+                ((ItemViewHolder) holder).title.setText(mData.get(position).getContent());
             }
         }
     }
@@ -91,6 +91,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return this.mShowFooter;
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
     public class FooterViewHolder extends RecyclerView.ViewHolder {
 
         public FooterViewHolder(View view) {
@@ -116,9 +120,5 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 mOnItemClickListener.onItemClick(v, this.getPosition());
             }
         }
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(View view, int position);
     }
 }

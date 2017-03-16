@@ -11,6 +11,7 @@ import butterknife.ButterKnife;
 import lx.base.apphall.canvas.CanvasActivity;
 import lx.base.apphall.custom_view.ViewActivity;
 import lx.base.apphall.custom_view.search_view.SearchViewActivity;
+import lx.base.apphall.demo.DynamicAddView;
 import lx.base.apphall.gridview.GridActivity;
 import lx.base.apphall.listview.NewsActivity;
 import lx.base.apphall.listview.sample_news.view.NewsView;
@@ -24,6 +25,7 @@ import lx.base.apphall.rxjava.RxJavaTestActivity;
 import lx.base.apphall.sweet_alert_dialog.DialogMainActivity;
 import lx.base.apphall.timepicker.TimePickerActivity;
 import lx.base.apphall.viewpager_fragment.FragActivity;
+import lx.base.apphall.weixin.view.ViewImpl;
 import lx_base.mybase.common.base.BaseActionBarActivity;
 
 public class MainActivity extends BaseActionBarActivity implements View.OnClickListener{
@@ -57,6 +59,10 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
     TextView sweetalert;
     @BindView(R.id.canvas)
     TextView canvas;
+    @BindView(R.id.weixin)
+    TextView weixin;
+    @BindView(R.id.demo)
+    TextView demo;
     private View mRootView;
     private int ranColor;
     private TextView grid;
@@ -97,6 +103,8 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
         rxjava.setOnClickListener(this);
         sweetalert.setOnClickListener(this);
         canvas.setOnClickListener(this);
+        weixin.setOnClickListener(this);
+        demo.setOnClickListener(this);
     }
 
     @Override
@@ -165,6 +173,14 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
                 break;
             case R.id.canvas:
                 intent.setClass(MainActivity.this, CanvasActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.weixin:
+                intent.setClass(MainActivity.this, ViewImpl.class);
+                startActivity(intent);
+                break;
+            case R.id.demo:
+                intent.setClass(MainActivity.this, DynamicAddView.class);
                 startActivity(intent);
                 break;
             default:

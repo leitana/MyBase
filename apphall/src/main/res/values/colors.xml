@@ -15,4 +15,7 @@
     <color name="green">#35c326</color><!-- 黄色 -->
     <color name="little_blue">#539CD1</color>
     <color name="primary_light">#FFCDD2</color>
+
+    <color name="darkgray">#828282</color>
+    <color name="lightgray">#d2d2d2</color>
 </resources>

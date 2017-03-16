@@ -6,40 +6,40 @@ import java.io.Serializable;
  * Created by Administrator on 2016/8/22.
  */
 public class JockContent implements Serializable{
-    private String ct;
-    private String text;
-    private String title;
-    private String type;
+    private String content;
+    private String hashId;
+    private String unixtime;
+    private String url;
 
-    public String getCt() {
-        return ct;
+    public String getContent() {
+        return content;
     }
 
-    public void setCt(String ct) {
-        this.ct = ct;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getText() {
-        return text;
+    public String getHashId() {
+        return hashId;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setHashId(String hashId) {
+        this.hashId = hashId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getUnixtime() {
+        return unixtime;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setUnixtime(String unixtime) {
+        this.unixtime = unixtime;
     }
 
-    public String getType() {
-        return type;
+    public String getUrl() {
+        return url;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

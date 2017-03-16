@@ -26,7 +26,7 @@ public class TestViewGroupActivity1 extends BaseActionBarActivity {
     protected View setMyContentView() {
         mRootView = getLayoutInflater().inflate(R.layout.empty, null);
         myImageBtns = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 15; i++) {
             MyImageBtn myImageBtn = new MyImageBtn(mContext, null);
             myImageBtn.setText("测试" + i);
             if (i == 0) {
@@ -37,7 +37,7 @@ public class TestViewGroupActivity1 extends BaseActionBarActivity {
             myImageBtns.add(myImageBtn);
         }
         layout = (LinearLayout) mRootView.findViewById(R.id.root);
-        TestViewGroup1 viewGroup1 = new TestViewGroup1(TestViewGroupActivity1.this);
+        TestViewGroup2 viewGroup1 = new TestViewGroup2(TestViewGroupActivity1.this);
         layout.addView(viewGroup1);
         viewGroup1.addChildViews(myImageBtns);
         return mRootView;

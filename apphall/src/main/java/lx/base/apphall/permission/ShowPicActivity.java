@@ -1,10 +1,15 @@
 package lx.base.apphall.permission;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.view.View;
 
+import java.io.ByteArrayOutputStream;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import lx.base.apphall.R;
 import lx_base.mybase.common.base.BaseActionBarActivity;
 import lx_base.mybase.common.util.ImageLoaderUtils;
@@ -15,11 +20,25 @@ import uk.co.senab.photoview.PhotoView;
  */
 public class ShowPicActivity extends BaseActionBarActivity {
     public static final String ARG_IMAGE_PATH = "image_path";//图片路径
+    @BindView(R.id.pv_image)
+    PhotoView pvImage;
     private View mRootView;
     private String mPath;
 
-    @BindView(R.id.pv_image)
-    PhotoView pvImage;
+    @OnClick(R.id.bt_yasuo)
+    public void onClick() {
+        byte[] byteData;
+        Bitmap bitmap = BitmapFactory.decodeFile(mPath);
+        Bitmap ratio = ImageFactory.ratio(bitmap, 120f, 240f);
+        byteData = bitmap2Bytes(ratio);
+    }
+
+    private byte[] bitmap2Bytes(Bitmap bm) {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, out);
+        return out.toByteArray();
+    }
+
 
 
     @Override

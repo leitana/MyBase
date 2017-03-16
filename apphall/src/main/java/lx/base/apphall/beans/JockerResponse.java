@@ -6,31 +6,31 @@ import java.io.Serializable;
  * Created by Administrator on 2016/8/22.
  */
 public class JockerResponse implements Serializable{
-    private String showapi_res_code;
-    private String showapi_res_error;
-    private JockBody showapi_res_body;
+    private String error_code;
+    private String reason;
+    private JockBody result;
 
-    public String getShowapi_res_code() {
-        return showapi_res_code;
+    public String getError_code() {
+        return error_code;
     }
 
-    public void setShowapi_res_code(String showapi_res_code) {
-        this.showapi_res_code = showapi_res_code;
+    public void setError_code(String error_code) {
+        this.error_code = error_code;
     }
 
-    public String getShowapi_res_error() {
-        return showapi_res_error;
+    public String getReason() {
+        return reason;
     }
 
-    public void setShowapi_res_error(String showapi_res_error) {
-        this.showapi_res_error = showapi_res_error;
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
-    public JockBody getShowapi_res_body() {
-        return showapi_res_body;
+    public JockBody getResult() {
+        return result;
     }
 
-    public void setShowapi_res_body(JockBody showapi_res_body) {
-        this.showapi_res_body = showapi_res_body;
+    public void setResult(JockBody result) {
+        this.result = result;
     }
 }

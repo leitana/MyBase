@@ -50,6 +50,9 @@
         <activity android:name=".canvas.TranslateActivity" />
         <activity android:name=".canvas.TopoActivity" />
         <activity android:name=".viewgroup.TestViewGroupActivity1" />
+        <activity android:name=".weixin.view.ViewImpl" />
+        <activity android:name=".weixin.view.WebView" />
+        <activity android:name=".demo.DynamicAddView" />
     </application>
 
 </manifest>

@@ -1,42 +1,55 @@
 package lx.base.apphall.listview.sample_news.model;
 
 import com.google.gson.Gson;
+import com.orhanobut.logger.Logger;
+import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import lx.base.apphall.beans.JockContent;
 import lx.base.apphall.beans.JockerResponse;
-import lx_base.mybase.common.util.OkHttpUtils;
 
 /**
  * 创建时间 2016/9/12
  * Created by linxiao.
+ * http://japi.juhe.cn/joke/img/text.from?key=6ca96a33f79dd59f6e66cfd507c6352b&page=1&pagesize=10
  */
 public class NewsModellmpl implements INewsModel{
-    private String httpUrl = "http://apis.baidu.com/showapi_open_bus/showapi_joke/joke_text";
+    private String httpUrl = "http://japi.juhe.cn/joke/content/text.from";
     private String httpArg = "page=";
+    private String key = "6ca96a33f79dd59f6e66cfd507c6352b";
     private String Url;
     private List<JockContent> mData;
+    private int nowPage = 1;
+    private int pageSize = 20;
+    private Gson gson = new Gson();
     @Override
     public void loadNews(int page, final OnLoadNewsListener listener) {
-        Url = httpUrl + "?" + httpArg + page;
-        final Gson gson = new Gson();
-        OkHttpUtils.ResultCallback<String> loadJockCallBack = new OkHttpUtils.ResultCallback<String>() {
-            @Override
-            public void onSuccess(String response) {
-                JockerResponse jockerResponse = gson.fromJson(response, JockerResponse.class);
-                mData = new ArrayList<>();
-                mData.addAll(jockerResponse.getShowapi_res_body().getContentlist());
-                listener.onSuccess(mData);
-            }
+        OkHttpUtils
+                .get()
+                .url(httpUrl)
+                .addParams("key", key)
+                .addParams("page", page + "")
+                .addParams("pagesize", pageSize + "")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Request request, Exception e) {
+                        Logger.d("有错");
+                    }
 
-            @Override
-            public void onFailure(Exception e) {
-                listener.onFailure("加载失败", e);
-            }
-        };
-        OkHttpUtils.getWithHead(Url, loadJockCallBack, "apikey","529cad5d92f049c0165be5fdfbf210b8");
+                    @Override
+                    public void onResponse(String response) {
+                        Logger.d(response);
+                        JockerResponse jockerResponse = gson.fromJson(response, JockerResponse.class);
+                        mData = new ArrayList<>();
+                        mData.addAll(jockerResponse.getResult().getData());
+                        listener.onSuccess(mData);
+                    }
+                });
     }
 
     public interface OnLoadNewsListener {
