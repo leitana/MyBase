@@ -16,7 +16,7 @@ import lx.base.apphall.gridview.GridActivity;
 import lx.base.apphall.listview.NewsActivity;
 import lx.base.apphall.listview.sample_news.view.NewsView;
 import lx.base.apphall.login.Splash;
-import lx.base.apphall.permission.PermissionpicActivity;
+import lx.base.apphall.permission.PermissionReviewActivity;
 import lx.base.apphall.popwindow.PopWindowActivity;
 import lx.base.apphall.progress.Progress;
 import lx.base.apphall.qr_code.QrCodeActivity;
@@ -116,7 +116,7 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
                 startActivity(intent);
                 break;
             case R.id.permission:
-                intent.setClass(MainActivity.this, PermissionpicActivity.class);
+                intent.setClass(MainActivity.this, PermissionReviewActivity.class);
                 startActivity(intent);
                 break;
             case R.id.recyclerView:
