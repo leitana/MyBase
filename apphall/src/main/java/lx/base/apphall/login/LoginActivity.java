@@ -145,4 +145,7 @@ public class LoginActivity extends BaseActionBarActivity {
         return m.matches();
     }
 
+//    private void test() {
+//        String str =
+//    }
 }

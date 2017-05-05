@@ -63,6 +63,8 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
     TextView weixin;
     @BindView(R.id.demo)
     TextView demo;
+    @BindView(R.id.event_bus)
+    TextView eventBus;
     private View mRootView;
     private int ranColor;
     private TextView grid;
@@ -183,6 +185,8 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
                 intent.setClass(MainActivity.this, DynamicAddView.class);
                 startActivity(intent);
                 break;
+            case R.id.event_bus:
+
             default:
                 break;
         }
