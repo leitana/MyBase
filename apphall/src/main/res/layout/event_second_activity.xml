@@ -4,13 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <Button
-        android:id="@+id/bt_try"
+        android:id="@+id/bt_send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="try"/>
-    <TextView
-        android:id="@+id/tv_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"/>
+        android:text="send_event"/>
 </LinearLayout>

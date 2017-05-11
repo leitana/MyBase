@@ -12,6 +12,7 @@ import lx.base.apphall.canvas.CanvasActivity;
 import lx.base.apphall.custom_view.ViewActivity;
 import lx.base.apphall.custom_view.search_view.SearchViewActivity;
 import lx.base.apphall.demo.DynamicAddView;
+import lx.base.apphall.event_bus.event1.EventFirstActvity;
 import lx.base.apphall.gridview.GridActivity;
 import lx.base.apphall.listview.NewsActivity;
 import lx.base.apphall.listview.sample_news.view.NewsView;
@@ -107,6 +108,7 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
         canvas.setOnClickListener(this);
         weixin.setOnClickListener(this);
         demo.setOnClickListener(this);
+        eventBus.setOnClickListener(this);
     }
 
     @Override
@@ -186,7 +188,8 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
                 startActivity(intent);
                 break;
             case R.id.event_bus:
-
+                intent.setClass(MainActivity.this, EventFirstActvity.class);
+                startActivity(intent);
             default:
                 break;
         }

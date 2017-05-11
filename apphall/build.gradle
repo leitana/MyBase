@@ -46,4 +46,6 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.1.0'
     //okhttps测试
     compile 'com.zhy:okhttputils:2.0.0'
+    //EventBus
+    compile 'org.greenrobot:eventbus:3.0.0'
 }
