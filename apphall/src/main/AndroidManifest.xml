@@ -53,7 +53,9 @@
         <activity android:name=".viewgroup.TestViewGroupActivity1" />
         <activity android:name=".weixin.view.ViewImpl" />
         <activity android:name=".weixin.view.WebView" />
-        <activity android:name=".demo.DynamicAddView" />
+        <activity android:name=".ExpandableListView.DynamicAddView" />
+        <activity android:name=".ExpandableListView.ExpandableMain" />
+        <activity android:name=".ExpandableListView.ThreeExpandableListView.ThreeExpandableListView"/>
         <activity android:name=".permission.PermissionReviewActivity"/>
         <activity android:name=".event_bus.event1.EventFirstActvity"/>
         <activity android:name=".event_bus.event1.EventSecondActivity"/>

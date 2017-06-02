@@ -1,4 +1,4 @@
-package lx.base.apphall.demo;
+package lx.base.apphall.ExpandableListView;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,8 +16,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lx.base.apphall.R;
-import lx.base.apphall.demo.beans.AddViewBean;
-import lx.base.apphall.demo.beans.TestResult;
+import lx.base.apphall.ExpandableListView.beans.AddViewBean;
+import lx.base.apphall.ExpandableListView.beans.TestResult;
 import lx_base.mybase.common.base.BaseActionBarActivity;
 
 /**

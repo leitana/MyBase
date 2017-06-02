@@ -1,4 +1,4 @@
-package lx.base.apphall.demo.beans;
+package lx.base.apphall.ExpandableListView.beans;
 
 public class Photo {
     private String photo;

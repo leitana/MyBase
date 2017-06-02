@@ -1,4 +1,4 @@
-package lx.base.apphall.demo;
+package lx.base.apphall.ExpandableListView;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import android.widget.BaseExpandableListAdapter;
 import java.util.List;
 
 import lx.base.apphall.R;
-import lx.base.apphall.demo.beans.AddViewBean;
+import lx.base.apphall.ExpandableListView.beans.AddViewBean;
 
 /**
  * 创建时间 2017/2/19

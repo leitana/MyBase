@@ -8,10 +8,10 @@ import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import lx.base.apphall.ExpandableListView.ExpandableMain;
 import lx.base.apphall.canvas.CanvasActivity;
 import lx.base.apphall.custom_view.ViewActivity;
 import lx.base.apphall.custom_view.search_view.SearchViewActivity;
-import lx.base.apphall.demo.DynamicAddView;
 import lx.base.apphall.event_bus.event1.EventFirstActvity;
 import lx.base.apphall.gridview.GridActivity;
 import lx.base.apphall.listview.NewsActivity;
@@ -184,7 +184,7 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
                 startActivity(intent);
                 break;
             case R.id.demo:
-                intent.setClass(MainActivity.this, DynamicAddView.class);
+                intent.setClass(MainActivity.this, ExpandableMain.class);
                 startActivity(intent);
                 break;
             case R.id.event_bus:
