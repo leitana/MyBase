@@ -353,7 +353,7 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/demo"
+                        android:id="@+id/expandableListView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:clickable="true"
@@ -396,12 +396,56 @@
                     android:padding="5dp">
 
                     <TextView
+                        android:id="@+id/fusionCharts"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="FusionCharts"
+                        android:textSize="15sp" />
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/mpAndroidCharts"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="MPAndroidCharts"
+                        android:textSize="15sp" />
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:elevation="5dp"
+                    android:padding="5dp">
+
+                    <TextView
                         android:id="@+id/test"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
                         android:gravity="center"
-                        android:text="Demo"
+                        android:text="test"
                         android:textSize="15sp" />
                 </android.support.v7.widget.CardView>
 

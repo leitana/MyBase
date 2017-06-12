@@ -9,10 +9,12 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lx.base.apphall.ExpandableListView.ExpandableMain;
+import lx.base.apphall.MPAndroidCharts.BarChartActivity;
 import lx.base.apphall.canvas.CanvasActivity;
 import lx.base.apphall.custom_view.ViewActivity;
 import lx.base.apphall.custom_view.search_view.SearchViewActivity;
 import lx.base.apphall.event_bus.event1.EventFirstActvity;
+import lx.base.apphall.fusionCharts.SampleActivity;
 import lx.base.apphall.gridview.GridActivity;
 import lx.base.apphall.listview.NewsActivity;
 import lx.base.apphall.listview.sample_news.view.NewsView;
@@ -29,7 +31,7 @@ import lx.base.apphall.viewpager_fragment.FragActivity;
 import lx.base.apphall.weixin.view.ViewImpl;
 import lx_base.mybase.common.base.BaseActionBarActivity;
 
-public class MainActivity extends BaseActionBarActivity implements View.OnClickListener{
+public class MainActivity extends BaseActionBarActivity implements View.OnClickListener {
     @BindView(R.id.permission)
     TextView permission;
     @BindView(R.id.recyclerView)
@@ -62,10 +64,14 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
     TextView canvas;
     @BindView(R.id.weixin)
     TextView weixin;
-    @BindView(R.id.demo)
-    TextView demo;
+    @BindView(R.id.expandableListView)
+    TextView expandableListView;
     @BindView(R.id.event_bus)
     TextView eventBus;
+    @BindView(R.id.fusionCharts)
+    TextView fusionCharts;
+    @BindView(R.id.mpAndroidCharts)
+    TextView mpAndroidCharts;
     private View mRootView;
     private int ranColor;
     private TextView grid;
@@ -75,7 +81,7 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
     protected View setMyContentView() {
         mRootView = getLayoutInflater().inflate(R.layout.activity_main, null);
         mRandom = new Random();
-        ButterKnife.bind(this,mRootView);
+        ButterKnife.bind(this, mRootView);
         return mRootView;
     }
 
@@ -107,8 +113,10 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
         sweetalert.setOnClickListener(this);
         canvas.setOnClickListener(this);
         weixin.setOnClickListener(this);
-        demo.setOnClickListener(this);
+        expandableListView.setOnClickListener(this);
         eventBus.setOnClickListener(this);
+        fusionCharts.setOnClickListener(this);
+        mpAndroidCharts.setOnClickListener(this);
     }
 
     @Override
@@ -183,13 +191,22 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
                 intent.setClass(MainActivity.this, ViewImpl.class);
                 startActivity(intent);
                 break;
-            case R.id.demo:
+            case R.id.expandableListView:
                 intent.setClass(MainActivity.this, ExpandableMain.class);
                 startActivity(intent);
                 break;
             case R.id.event_bus:
                 intent.setClass(MainActivity.this, EventFirstActvity.class);
                 startActivity(intent);
+                break;
+            case R.id.fusionCharts:
+                intent.setClass(MainActivity.this, SampleActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.mpAndroidCharts:
+                intent.setClass(MainActivity.this, BarChartActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }
