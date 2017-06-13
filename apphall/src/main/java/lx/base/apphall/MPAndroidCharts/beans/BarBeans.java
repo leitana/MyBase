@@ -1,4 +1,4 @@
-package lx.base.apphall.MPAndroidCharts;
+package lx.base.apphall.MPAndroidCharts.beans;
 
 import java.io.Serializable;
 

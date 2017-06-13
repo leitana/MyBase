@@ -60,7 +60,8 @@
         <activity android:name=".event_bus.event1.EventFirstActvity"/>
         <activity android:name=".event_bus.event1.EventSecondActivity"/>
         <activity android:name=".fusionCharts.SampleActivity" />
-        <activity android:name=".MPAndroidCharts.BarChartActivity" />
+        <activity android:name=".MPAndroidCharts.MPAndroidActivity"/>
+        <activity android:name=".MPAndroidCharts.BarChart.BarChartActivity" />
     </application>
 
 </manifest>

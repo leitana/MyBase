@@ -9,7 +9,7 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lx.base.apphall.ExpandableListView.ExpandableMain;
-import lx.base.apphall.MPAndroidCharts.BarChartActivity;
+import lx.base.apphall.MPAndroidCharts.MPAndroidActivity;
 import lx.base.apphall.canvas.CanvasActivity;
 import lx.base.apphall.custom_view.ViewActivity;
 import lx.base.apphall.custom_view.search_view.SearchViewActivity;
@@ -204,7 +204,7 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
                 startActivity(intent);
                 break;
             case R.id.mpAndroidCharts:
-                intent.setClass(MainActivity.this, BarChartActivity.class);
+                intent.setClass(MainActivity.this, MPAndroidActivity.class);
                 startActivity(intent);
                 break;
             default:

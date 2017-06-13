@@ -1,10 +1,10 @@
-package lx.base.apphall.MPAndroidCharts;
+package lx.base.apphall.MPAndroidCharts.BarChart;
 
+import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.view.View;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -12,7 +12,6 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
@@ -21,6 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import lx.base.apphall.MPAndroidCharts.beans.BarBeans;
 import lx.base.apphall.R;
 import lx_base.mybase.common.base.BaseActionBarActivity;
 
@@ -56,6 +56,7 @@ public class BarChartActivity extends BaseActionBarActivity {
     @Override
     protected void initView() {
         super.initView();
+        setMyActionBarTitle("柱状图");
         mChart.setDrawBarShadow(false);
         mChart.setDrawValueAboveBar(true);
         mChart.getDescription().setEnabled(true);
@@ -63,7 +64,7 @@ public class BarChartActivity extends BaseActionBarActivity {
         mChart.setPinchZoom(false);
         mChart.setNoDataText("没数据时展示信息");
         mChart.setTouchEnabled(true); // 设置是否可以触摸
-        mChart.setScaleEnabled(false);     //禁止缩放
+        mChart.setScaleEnabled(true);     //禁止缩放
         mChart.setDragEnabled(true);// 是否可以拖拽
         mChart.setHighlightPerDragEnabled(true);// 拖拽超过图标绘制画布时高亮显示
         mChart.setDrawGridBackground(false);
@@ -81,18 +82,12 @@ public class BarChartActivity extends BaseActionBarActivity {
         xAxis.setDrawLabels(true);//水平线
         xAxis.setDrawGridLines(false);//网格线
         xAxis.setTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf"));//字体的相关的设置
-        xAxis.setGranularity(0f);//设置最小间隔，防止当放大时，出现重复标签。
-        xAxis.setCenterAxisLabels(true);//字体下面的标签 显示在每个直方图的中间
-        xAxis.setLabelCount(23,true);//一个界面显示22个Lable。那么这里要设置11个
+        xAxis.setGranularity(1f);//设置最小间隔，防止当放大时，出现重复标签。
+//        xAxis.setCenterAxisLabels(true);//字体下面的标签 显示在每个直方图的中间(分组直方图中间)
+        xAxis.setLabelCount(23,false);//一个界面显示22个Lable。那么这里要设置11个
         xAxis.setTextSize(10f);
         xAxis.setXOffset(0);
-        xAxis.setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-
-                return null;
-            }
-        });
+        xAxis.setValueFormatter(new MyXFormatter());
 
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.setTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf"));
@@ -119,12 +114,25 @@ public class BarChartActivity extends BaseActionBarActivity {
         l.setFormSize(9f);
         l.setTextSize(11f);
         l.setXEntrySpace(4f);
+
+        CustomMarkerView markerView = new CustomMarkerView(BarChartActivity.this, R.layout.custom_marker_view);
+        markerView.setChartView(mChart); // For bounds control
+        mChart.setMarker(markerView); // Set the marker to the chart
+
         setData();
+
+        //使柱状图可以左右显示
+        Matrix mMatrix=new Matrix();
+        mMatrix.postScale(1.5f, 1f);//两个参数分别是x,y轴的缩放比例。例如：将x轴的数据放大为之前的1.5倍
+        mChart.getViewPortHandler().refresh(mMatrix, mChart, false);//将图表动画显示之前进行缩放
+//        mChart.animateX(1000); // 立即执行的动画,x轴
+        mChart.animateY(800);
+        mChart.moveViewToX(4);
     }
     private void setData() {
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
         for (int i = 0; i < 22; i++) {
-            yVals1.add(new BarEntry(i + 1, (float) (Math.random() * 2000), mDatas.get(i)));
+            yVals1.add(new BarEntry(i + 1, (float) (Math.random() * 2000)));
         }
         BarDataSet set1;
         if (mChart.getData() != null &&
