@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -14,6 +13,7 @@ import java.util.List;
 
 import lx.base.apphall.R;
 import lx.base.apphall.canvas.MyImageBtn;
+import lx.base.apphall.recyclierview.Coordinate;
 
 /**
  * 创建时间 2016/12/14
@@ -29,6 +29,11 @@ public class TestViewGroup1 extends ViewGroup {
     private int mMinSize;//宽和高中最小值
     private List<String> stringList;
     private int count;
+    private List<Coordinate> xyList = new ArrayList<>();
+    private int childWidth;
+    private int childHeight;
+    private List<Coordinate> lineList = new ArrayList<>();
+    private int test = 7;
 
     public TestViewGroup1(Context context) {
         super(context);
@@ -80,75 +85,93 @@ public class TestViewGroup1 extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int childCount = getChildCount();
-//        int radius = getWidth() / 2 - padding ; // 减去padding的半径
-//        int realRadius = getWidth() / 2;  // 实际半径
-        double angle = 0;
-        double grad = Math.PI * 2 / (childCount - 1);//梯度，每个TextView之间的角度 (Math.PI 是数学中的90°)
-        double rightAngle = Math.PI / 2;
         int cx = mWidth / 2;//容器中心x坐标
         int cy = mHeight / 2;//容器中心y坐标
-        int radius = mMinSize / 2 / 2 / 2 + mMinSize / 2 / 2;//动态气泡的组成圆的半径
+        View firstView = getChildAt(1);//第一个子节点大小
+        childWidth = firstView.getMeasuredWidth() + 10;
+        childHeight = firstView.getMeasuredHeight() + 10;
+        int widthNum = mWidth / childWidth - 2;//一行最大数量
+        int heighNum = mHeight / childHeight - 3;//一列最大数量
+
+        for (int x = 1; x <= widthNum; x++) {
+            for (int y = 1; y <= heighNum; y++) {
+                if (x != widthNum / 2 && y != heighNum / 2 ||
+                        x != widthNum / 2 && y != heighNum / 2 + 1 ||
+                        x != widthNum / 2 && y != heighNum / 2 - 1 ||
+                        x != widthNum / 2 - 1 && y != heighNum / 2 ||
+                        x != widthNum / 2 + 1 && y != heighNum / 2 ||
+                        x != widthNum / 2 - 1 && y != heighNum / 2 + 1 ||
+                        x != widthNum / 2 - 1 && y != heighNum / 2 - 1 ||
+                        x != widthNum / 2 + 1 && y != heighNum / 2 - 1 ||
+                        x != widthNum / 2 + 1 && y != heighNum / 2 + 1) {
+                    Coordinate coordinate = new Coordinate();
+                    coordinate.setxPosition(x);
+                    coordinate.setyPosition(y);
+                    xyList.add(coordinate);
+                }
+            }
+        }
+
+        //初始坐标
+        int left = 10;
+        int top = 10;
+        int right = left + childWidth;
+        int bottom = top + childHeight;
 
         for (int i = 0; i < childCount; i++) {
             final View childView = getChildAt(i);
             if (i == 0) {//中心
                 childView.layout((getWidth() - childView.getMeasuredWidth()) / 2, (getHeight() - childView.getMeasuredHeight()) / 2,
                         (getWidth() + childView.getMeasuredWidth()) / 2, (getHeight() + childView.getMeasuredHeight()) / 2);
-            } else {
-                int left = 0;
-                int top = 0;
-                int right = 0;
-                int bottom = 0;
-                int x = 0, y = 0;
-                int childRadius = childView.getMeasuredWidth() / 2;//计算得来//固定死的mMinSize / 6 / 2;//气泡半径
-                if (angle >= 0 && angle < rightAngle) {  //0 - 90
-                    //保持角度在 0 - 90
-                    x = (int) (radius * Math.sin(Math.abs(angle % rightAngle)));
-                    y = (int) (radius * Math.cos(Math.abs(angle % rightAngle)));
-
-                    left = cx + x - childRadius;
-                    top = cy - y - childRadius;
-                    right = left + 2 * childRadius;
-                    bottom = top + 2 * childRadius;
-
-                } else if (angle >= rightAngle && angle < rightAngle * 2) { // 90 - 180
-                    x = (int) (radius * Math.sin(Math.abs(angle % rightAngle)));
-                    y = (int) (radius * Math.cos(Math.abs(angle % rightAngle)));
-                    left = cx + y - childRadius;
-                    top = cy + x - childRadius;
-                    right = left + 2 * childRadius;
-                    bottom = top + 2 * childRadius;
-                    //System.out.println("-----------90 - 180---1--a:"+a);
-                    //System.out.println("-----------90 - 180---1--b:"+b);
-
-                } else if (angle >= rightAngle * 2 && angle < rightAngle * 3) { // 180 - 270
-                    x = (int) (radius * Math.sin(Math.abs(angle % rightAngle)));
-                    y = (int) (radius * Math.cos(Math.abs(angle % rightAngle)));
-                    left = cx - x - childRadius;
-                    top = cy + y - childRadius;
-                    right = left + 2 * childRadius;
-                    bottom = top + 2 * childRadius;
-                    //System.out.println("-----------180 - 270---1--a:"+a);
-                    //System.out.println("-----------180 - 270---1--b:"+b);
-                } else if (angle >= rightAngle * 3 && angle < rightAngle * 4) { //270 - 360
-                    x = (int) (radius * Math.sin(Math.abs(angle % rightAngle)));
-                    y = (int) (radius * Math.cos(Math.abs(angle % rightAngle)));
-                    left = cx - y - childRadius;
-                    top = cy - x - childRadius;
-                    right = left + 2 * childRadius;
-                    bottom = top + 2 * childRadius;
-                    //System.out.println("-----------270 - 360---1--a:"+a);
-                    // System.out.println("-----------270 - 360---1--b:"+b);
+                int centerLeft = (getWidth() - childView.getMeasuredWidth()) / 2;
+                int centerTop = (getHeight() - childView.getMeasuredHeight()) / 2;
+                int centerRight = (getWidth() + childView.getMeasuredWidth()) / 2;
+                int centerBottom = (getHeight() + childView.getMeasuredHeight()) / 2;
+                childView.layout(centerLeft, centerTop, centerRight, centerBottom);
+//                Coordinate center = new Coordinate();
+//                center.setxPosition((centerLeft + centerRight) / 2);
+//                center.setyPosition((centerTop + centerBottom) / 2);
+//                lineList.add(center);
+                for (int p = 0; p < xyList.size(); p++) {
+                    if (Math.abs(50 + childWidth * xyList.get(p).getxPosition() - centerLeft) < childWidth + 10) {
+                        xyList.remove(p);
+                    }
                 }
-                childView.layout(left, top, right, bottom + 100);//l,t,r,b
-                angle += grad;
-//                float angle = (float)((360.0f / (childCount - 1) * (i - 1)) / 180 * Math.PI);
-//                int startX = getXByAngle(radius , angle , childView);
-//                int startY = getYByAngle(radius , angle , childView);
-//                childView.layout(realRadius + startX, realRadius + startY,
-//                        realRadius + startX + childView.getMeasuredWidth(), realRadius + startY + childView.getMeasuredHeight());
-
+                for (int p = 0; p < xyList.size(); p++) {
+                    if (Math.abs(50 + childWidth * xyList.get(p).getyPosition() - right) < childHeight + 10) {
+                        xyList.remove(p);
+                    }
+                }
+            } else {
+                if (!changed) {
+                    int random = (int) (Math.random() * (xyList.size() - 1));//随机数
+                    left = 10 + childWidth * xyList.get(random).getxPosition();
+                    top = 10 + childHeight * xyList.get(random).getyPosition();
+                    right = left + childWidth + 15;
+                    bottom = top + childHeight;
+                    childView.layout(left, top, right, bottom);//l,t,r,b
+//                    for (int p = 0; p < xyList.size(); p++) {
+//                        if (Math.abs(50 + childWidth * xyList.get(p).getxPosition() - left) < childWidth - 10) {
+//                            xyList.remove(p);
+//                        }
+//                    }
+//                    for (int p = 0; p < xyList.size(); p++) {
+//                        if (Math.abs(50 + childWidth * xyList.get(p).getyPosition() - top) < childHeight - 10) {
+//                            xyList.remove(p);
+//                        }
+//                    }
+                    xyList.remove(random);
+                    Coordinate center = new Coordinate();
+                    center.setxPosition((left + right) / 2);
+                    center.setyPosition((top + bottom) / 2);
+                    lineList.add(center);
+                }
+//                angle += grad;
             }
+            left = 50;
+            top = 50;
+            right = left + childWidth;
+            bottom = top + childHeight;
             final int finalI = i;
             childView.setOnClickListener(new OnClickListener() {
                 @Override
@@ -164,89 +187,14 @@ public class TestViewGroup1 extends ViewGroup {
         super.onDraw(canvas);
         Paint p = new Paint();
         p.setColor(getResources().getColor(R.color.black));
-//        p.setStrokeWidth(10f);
-        double angle = 0;
-        double grad = Math.PI * 2 / (count - 1);//梯度，每个TextView之间的角度 (Math.PI 是数学中的90°)
-        double rightAngle = Math.PI / 2;
         int cx = mWidth / 2;//容器中心x坐标
         int cy = mHeight / 2;//容器中心y坐标
-        int radius = mMinSize / 2 / 2 / 2 + mMinSize / 2 / 2;//动态气泡的组成圆的半径
 
-        for (int i = 0; i < count; i++) {
-            final View childView = getChildAt(i);
-            if (i == 0) {//中心
-//                childView.layout((getWidth() - childView.getMeasuredWidth()) / 2, (getHeight() - childView.getMeasuredHeight()) / 2,
-//                        (getWidth() + childView.getMeasuredWidth()) / 2, (getHeight() + childView.getMeasuredHeight()) / 2);
-            } else {
-                int left = 0;
-                int top = 0;
-                int right = 0;
-                int bottom = 0;
-                int x = 0, y = 0;
-                int childRadius = childView.getMeasuredWidth() / 2;//计算得来//固定死的mMinSize / 6 / 2;//气泡半径
-                if (angle >= 0 && angle < rightAngle) {  //0 - 90
-                    //保持角度在 0 - 90
-                    x = (int) (radius * Math.sin(Math.abs(angle % rightAngle)));
-                    y = (int) (radius * Math.cos(Math.abs(angle % rightAngle)));
-
-                    left = cx + x - childRadius;
-                    top = cy - y - childRadius;
-                    right = left + 2 * childRadius;
-                    bottom = top + 2 * childRadius;
-
-                } else if (angle >= rightAngle && angle < rightAngle * 2) { // 90 - 180
-                    x = (int) (radius * Math.sin(Math.abs(angle % rightAngle)));
-                    y = (int) (radius * Math.cos(Math.abs(angle % rightAngle)));
-                    left = cx + y - childRadius;
-                    top = cy + x - childRadius;
-                    right = left + 2 * childRadius;
-                    bottom = top + 2 * childRadius;
-                    //System.out.println("-----------90 - 180---1--a:"+a);
-                    //System.out.println("-----------90 - 180---1--b:"+b);
-
-                } else if (angle >= rightAngle * 2 && angle < rightAngle * 3) { // 180 - 270
-                    x = (int) (radius * Math.sin(Math.abs(angle % rightAngle)));
-                    y = (int) (radius * Math.cos(Math.abs(angle % rightAngle)));
-                    left = cx - x - childRadius;
-                    top = cy + y - childRadius;
-                    right = left + 2 * childRadius;
-                    bottom = top + 2 * childRadius;
-                    //System.out.println("-----------180 - 270---1--a:"+a);
-                    //System.out.println("-----------180 - 270---1--b:"+b);
-                } else if (angle >= rightAngle * 3 && angle < rightAngle * 4) { //270 - 360
-                    x = (int) (radius * Math.sin(Math.abs(angle % rightAngle)));
-                    y = (int) (radius * Math.cos(Math.abs(angle % rightAngle)));
-                    left = cx - y - childRadius;
-                    top = cy - x - childRadius;
-                    right = left + 2 * childRadius;
-                    bottom = top + 2 * childRadius;
-                    //System.out.println("-----------270 - 360---1--a:"+a);
-                    // System.out.println("-----------270 - 360---1--b:"+b);
-                }
-//                childView.layout(left, top, right, bottom + 100);//l,t,r,b
-                canvas.drawLine((left + right) / 2, (top + bottom) / 2, cx, cy, p);
-                angle += grad;
-//                float angle = (float)((360.0f / (childCount - 1) * (i - 1)) / 180 * Math.PI);
-//                int startX = getXByAngle(radius , angle , childView);
-//                int startY = getYByAngle(radius , angle , childView);
-//                childView.layout(realRadius + startX, realRadius + startY,
-//                        realRadius + startX + childView.getMeasuredWidth(), realRadius + startY + childView.getMeasuredHeight());
-
-            }
+        for (int i = 0; i < lineList.size(); i++) {
+            canvas.drawLine(lineList.get(i).getxPosition(), lineList.get(i).getyPosition(), cx, cy, p);
         }
     }
 
-    private int getYByAngle(float radius, float angle, View view) {
-        float y = (float) (radius * Math.cos(angle));
-        Log.i(TAG, "getYByAngle  radius = " + radius + "angle = " + angle + "y = " + y);
-        return (int) y - view.getMeasuredHeight() / 2;
-    }
-
-    private int getXByAngle(float radius, float angle, View view) {
-        float x = (float) (radius * Math.sin(angle));
-        Log.i(TAG, "getXByAngle  radius = " + radius + "angle = " + angle + "x = " + x);
-        return (int) x - view.getMeasuredWidth() / 2;
-    }
 
     public void addChildViews(List<MyImageBtn> myImageBtn) {
         stringList = new ArrayList<>();
