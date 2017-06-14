@@ -15,7 +15,7 @@ import lx.base.apphall.custom_view.ViewActivity;
 import lx.base.apphall.custom_view.search_view.SearchViewActivity;
 import lx.base.apphall.event_bus.event1.EventFirstActvity;
 import lx.base.apphall.fusionCharts.SampleActivity;
-import lx.base.apphall.gridview.GridActivity;
+import lx.base.apphall.gridview.GridCheckActivity;
 import lx.base.apphall.listview.NewsActivity;
 import lx.base.apphall.listview.sample_news.view.NewsView;
 import lx.base.apphall.login.Splash;
@@ -124,7 +124,7 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.tv_grid:
-                intent.setClass(MainActivity.this, GridActivity.class);
+                intent.setClass(MainActivity.this, GridCheckActivity.class);
                 startActivity(intent);
                 break;
             case R.id.permission:
