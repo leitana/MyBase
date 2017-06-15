@@ -24,6 +24,7 @@ public class GridCheckActivity extends BaseActionBarActivity {
     TagFlowLayout mFlowLayout;
     private View mRootView;
     private List<String> mVals;
+    private String[] mVals2 = {"111", "2222"};
 
     @Override
     protected View setMyContentView() {
@@ -39,7 +40,7 @@ public class GridCheckActivity extends BaseActionBarActivity {
         for (int i = 0; i < 17; i++) {
             mVals.add("Tag:" + i);
         }
-        mFlowLayout.setAdapter(new TagAdapter<String>(mVals)
+        mFlowLayout.setAdapter(new TagAdapter<String>(mVals2)
         {
             @Override
             public View getView(FlowLayout parent, int position, String s)

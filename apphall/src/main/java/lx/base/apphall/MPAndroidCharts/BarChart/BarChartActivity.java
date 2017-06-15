@@ -16,11 +16,9 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import lx.base.apphall.MPAndroidCharts.beans.BarBeans;
 import lx.base.apphall.R;
 import lx_base.mybase.common.base.BaseActionBarActivity;
 
@@ -32,7 +30,7 @@ public class BarChartActivity extends BaseActionBarActivity {
     @BindView(R.id.bar_chart)
     BarChart mChart;
     private View mRootView;
-    private List<BarBeans> mDatas;
+//    private List<BarBeans> mDatas;
 
     @Override
     protected View setMyContentView() {
@@ -44,13 +42,13 @@ public class BarChartActivity extends BaseActionBarActivity {
     @Override
     protected void initParm() {
         super.initParm();
-        mDatas = new ArrayList<>();
-        for (int i = 0; i < 22; i++) {
-            BarBeans barBeans = new BarBeans();
-            barBeans.setValue((float) (Math.random() * 2000));
-            barBeans.setxName("成都" + i);
-            mDatas.add(barBeans);
-        }
+//        mDatas = new ArrayList<>();
+//        for (int i = 0; i < 22; i++) {
+//            BarBeans barBeans = new BarBeans();
+//            barBeans.setValue((float) (Math.random() * 2000));
+//            barBeans.setxName("成都" + i);
+//            mDatas.add(barBeans);
+//        }
     }
 
     @Override
