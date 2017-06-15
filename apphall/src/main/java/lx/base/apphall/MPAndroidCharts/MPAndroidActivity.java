@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lx.base.apphall.MPAndroidCharts.BarChart.BarChartActivity;
+import lx.base.apphall.MPAndroidCharts.MultipleBar.MultipleBarChartActivity;
 import lx.base.apphall.MPAndroidCharts.adapter.MyAdapter;
 import lx.base.apphall.MPAndroidCharts.beans.ContentItem;
 import lx.base.apphall.R;
@@ -55,6 +56,10 @@ public class MPAndroidActivity extends BaseActionBarActivity implements AdapterV
         switch (position) {
             case 0:
                 i = new Intent(this, BarChartActivity.class);
+                startActivity(i);
+                break;
+            case 1:
+                i = new Intent(this, MultipleBarChartActivity.class);
                 startActivity(i);
                 break;
         }

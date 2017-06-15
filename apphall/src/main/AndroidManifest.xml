@@ -63,6 +63,7 @@
         <activity android:name=".fusionCharts.SampleActivity" />
         <activity android:name=".MPAndroidCharts.MPAndroidActivity"/>
         <activity android:name=".MPAndroidCharts.BarChart.BarChartActivity" />
+        <activity android:name=".MPAndroidCharts.MultipleBar.MultipleBarChartActivity" />
     </application>
 
 </manifest>

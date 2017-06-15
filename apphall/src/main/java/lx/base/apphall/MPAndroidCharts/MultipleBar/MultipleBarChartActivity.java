@@ -6,6 +6,7 @@ import android.view.View;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
@@ -21,15 +22,14 @@ import lx_base.mybase.common.base.BaseActionBarActivity;
  */
 
 public class MultipleBarChartActivity extends BaseActionBarActivity {
+    public BarDataSet set1, set2, set3, set4;
     @BindView(R.id.bar_chart)
     BarChart barChart;
+    ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+    ArrayList<BarEntry> yVals2 = new ArrayList<BarEntry>();
+    ArrayList<BarEntry> yVals3 = new ArrayList<BarEntry>();
+    ArrayList<BarEntry> yVals4 = new ArrayList<BarEntry>();
     private View mRootView;
-
-    public ArrayList<BarEntry> entries = new ArrayList<BarEntry>(); //(x,y1)
-    public ArrayList<BarEntry> entries2 = new ArrayList<BarEntry>();//(x,y2)
-    public ArrayList<BarEntry> entries3= new ArrayList<BarEntry>();//(x,y3)
-    public BarDataSet dataset ,dataset2,dataset3;
-
     private XAxis xAxis; //X坐标轴
     private YAxis yAxis; //Y
 
@@ -61,58 +61,35 @@ public class MultipleBarChartActivity extends BaseActionBarActivity {
     }
 
     public void initEntriesData() {
-        entries.add(new BarEntry(4f, 0));
-        entries.add(new BarEntry(8f, 1));
-        entries.add(new BarEntry(6f, 2));
-        entries.add(new BarEntry(12f, 3));
-        entries.add(new BarEntry(18f, 4));
-        entries.add(new BarEntry(9f, 5));
-        entries.add(new BarEntry(4f, 6));
-        entries.add(new BarEntry(8f, 7));
-        entries.add(new BarEntry(6f, 8));
-        entries.add(new BarEntry(12f, 9));
-        entries.add(new BarEntry(18f, 10));
-        entries.add(new BarEntry(9f, 11));
-
-        entries2.add(new BarEntry(5f, 0));
-        entries2.add(new BarEntry(6f, 1));
-        entries2.add(new BarEntry(7f, 2));
-        entries2.add(new BarEntry(5f, 3));
-        entries2.add(new BarEntry(13f, 4));
-        entries2.add(new BarEntry(12f, 5));
-        entries2.add(new BarEntry(5f, 6));
-        entries2.add(new BarEntry(6f, 7));
-        entries2.add(new BarEntry(7f, 8));
-        entries2.add(new BarEntry(5f, 9));
-        entries2.add(new BarEntry(13f, 10));
-        entries2.add(new BarEntry(12f, 11));
-
-        entries3.add(new BarEntry(8f, 0));
-        entries3.add(new BarEntry(4f, 1));
-        entries3.add(new BarEntry(15f, 2));
-        entries3.add(new BarEntry(12f, 3));
-        entries3.add(new BarEntry(12f, 4));
-        entries3.add(new BarEntry(1f, 5));
-        entries3.add(new BarEntry(8f, 6));
-        entries3.add(new BarEntry(4f, 7));
-        entries3.add(new BarEntry(15f, 8));
-        entries3.add(new BarEntry(12f, 9));
-        entries3.add(new BarEntry(12f, 10));
-        entries3.add(new BarEntry(1f, 11));
+        for (int i = 0; i < 6; i++) {
+            yVals1.add(new BarEntry(i, (float) (Math.random() * 20)));
+            yVals2.add(new BarEntry(i, (float) (Math.random() * 20)));
+            yVals3.add(new BarEntry(i, (float) (Math.random() * 20)));
+            yVals4.add(new BarEntry(i, (float) (Math.random() * 20)));
+        }
     }
 
     public void show() {
-        dataset = new BarDataSet(entries, "甲");
-        dataset.setColor(Color.rgb(255, 48, 48));
-        dataset2 = new BarDataSet(entries2, "乙");
-        dataset2.setColor(Color.rgb(0, 191, 255));
-        dataset3 = new BarDataSet(entries3, "丙");
-        dataset3.setColor(Color.rgb(255, 215, 0));
+        float groupSpace = 0.08f;
+        float barSpace = 0.03f; // x4 DataSet
+        float barWidth = 0.2f; // x4 DataSet
+        // (0.2 + 0.03) * 4 + 0.08 = 1.00 -> interval per "group"
 
-        ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>(); //坐标线的集合。
-        dataSets.add(dataset);
-        dataSets.add(dataset2);
-        dataSets.add(dataset3);
+        set1 = new BarDataSet(yVals1, "Company A");
+        set1.setColor(Color.rgb(104, 241, 175));
+        set2 = new BarDataSet(yVals2, "Company B");
+        set2.setColor(Color.rgb(164, 228, 251));
+        set3 = new BarDataSet(yVals3, "Company C");
+        set3.setColor(Color.rgb(242, 247, 158));
+        set4 = new BarDataSet(yVals4, "Company D");
+        set4.setColor(Color.rgb(255, 102, 0));
+
+//        ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>(); //坐标线的集合。
+//        dataSets.add(dataset);
+//        dataSets.add(dataset2);
+//        dataSets.add(dataset3);
+
+        BarData data = new BarData(set1, set2, set3, set4);
 
         ArrayList<String> xVals = new ArrayList<String>(); //x轴坐标
         for(int i = 1;i<13;i++){
@@ -120,12 +97,12 @@ public class MultipleBarChartActivity extends BaseActionBarActivity {
         }
 
 
-//        BarData data3 = new BarData(dataSets);
-//        barChart.setData(data3);
-        barChart.animateY(2000);//动画效果 y轴方向，2秒
+//        BarData data3 = new BarData(xVals, dataSets);
+        barChart.setData(data);
 
-
-
-
+        data.setBarWidth(barWidth);
+        barChart.setData(data);//装载数据
+        barChart.groupBars(0f, groupSpace, barSpace);
+        barChart.invalidate();//刷新
     }
 }
