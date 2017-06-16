@@ -16,22 +16,24 @@ import lx.base.apphall.R;
 
 public class CustomMarkerView extends MarkerView {
     private TextView tvContent;
+    protected String[] areaName;
     /**
      * Constructor. Sets up the MarkerView with a custom layout resource.
      *
      * @param context
      * @param layoutResource the layout resource to use for the MarkerView
      */
-    public CustomMarkerView(Context context, int layoutResource) {
+    public CustomMarkerView(Context context, int layoutResource, String[] areaName) {
         super(context, layoutResource);
         tvContent = (TextView) findViewById(R.id.tvContent);
+        this.areaName = areaName;
     }
 
     // callbacks everytime the MarkerView is redrawn, can be used to update the
     // content (user-interface)
     @Override
     public void refreshContent(Entry e, Highlight highlight) {
-        tvContent.setText(e.getX() + "--" + e.getY() + "--" + e.getData());
+        tvContent.setText(areaName[(int)e.getX()] + "--" + e.getY() + "--" + e.getData());
         super.refreshContent(e, highlight);
     }
 

@@ -1,19 +1,25 @@
 package lx.base.apphall.MPAndroidCharts.MultipleBar;
 
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.view.View;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.LargeValueFormatter;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import lx.base.apphall.MPAndroidCharts.BarChart.CustomMarkerView;
 import lx.base.apphall.R;
 import lx_base.mybase.common.base.BaseActionBarActivity;
 
@@ -24,14 +30,17 @@ import lx_base.mybase.common.base.BaseActionBarActivity;
 public class MultipleBarChartActivity extends BaseActionBarActivity {
     public BarDataSet set1, set2, set3, set4;
     @BindView(R.id.bar_chart)
-    BarChart barChart;
+    BarChart mChart;
     ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
     ArrayList<BarEntry> yVals2 = new ArrayList<BarEntry>();
     ArrayList<BarEntry> yVals3 = new ArrayList<BarEntry>();
     ArrayList<BarEntry> yVals4 = new ArrayList<BarEntry>();
     private View mRootView;
-    private XAxis xAxis; //X坐标轴
-    private YAxis yAxis; //Y
+    private String[] areaName = new String[]{
+            "成都", "绵阳", "乐山", "峨眉", "泸州", "南充", "九寨沟", "攀枝花", "甘孜",
+            "成都", "绵阳", "乐山", "峨眉", "泸州", "南充", "九寨沟", "攀枝花", "甘孜",
+            "成都", "绵阳", "乐山", "峨眉", "buchong"
+    };
 
     @Override
     protected View setMyContentView() {
@@ -43,21 +52,59 @@ public class MultipleBarChartActivity extends BaseActionBarActivity {
     @Override
     protected void initView() {
         super.initView();
-        xAxis = barChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);//X轴在下边
-        yAxis = barChart.getAxisLeft();
-        xAxis.setDrawGridLines(false);//不要竖线网格
-        yAxis.setStartAtZero(false);//不一定从0坐标开始
-        barChart.getAxisRight().setEnabled(false); // 隐藏右边 的坐标轴
-        xAxis.setAvoidFirstLastClipping(false);
 
-        barChart.getAxisRight().setEnabled(false);
-        barChart.zoom(3.0f,1.0f,0f,0f);
+        mChart.getDescription().setEnabled(false);
+        // scaling can now only be done on x- and y-axis separately
+        mChart.setPinchZoom(false);
 
+        mChart.setDrawBarShadow(false);
 
-        initEntriesData();  //添加Y轴数据
+        mChart.setDrawGridBackground(false);
+
+        CustomMarkerView markerView = new CustomMarkerView(MultipleBarChartActivity.this, R.layout.custom_marker_view, areaName);
+        markerView.setChartView(mChart); // For bounds control
+        mChart.setMarker(markerView); // Set the marker to the chart
+
+        Legend l = mChart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setDrawInside(true);
+        l.setYOffset(0f);
+        l.setXOffset(10f);
+        l.setYEntrySpace(0f);
+        l.setTextSize(8f);
+
+        XAxis xAxis = mChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setGranularity(1f);
+        xAxis.setCenterAxisLabels(true);
+        xAxis.setXOffset(0);
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                int i = (int) value;
+                return i < 0 ? "" : areaName[i];
+            }
+        });
+
+        YAxis leftAxis = mChart.getAxisLeft();
+        leftAxis.setValueFormatter(new LargeValueFormatter());
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setSpaceTop(35f);
+        leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
+
+        mChart.getAxisRight().setEnabled(false);
+
+        initEntriesData();
 
         show();
+
+        Matrix mMatrix=new Matrix();
+        mMatrix.postScale(1.5f, 1f);//两个参数分别是x,y轴的缩放比例。例如：将x轴的数据放大为之前的1.5倍
+        mChart.getViewPortHandler().refresh(mMatrix, mChart, false);//将图表动画显示之前进行缩放
+//        mChart.animateX(1000); // 立即执行的动画,x轴
+        mChart.animateY(800);
     }
 
     public void initEntriesData() {
@@ -91,18 +138,17 @@ public class MultipleBarChartActivity extends BaseActionBarActivity {
 
         BarData data = new BarData(set1, set2, set3, set4);
 
-        ArrayList<String> xVals = new ArrayList<String>(); //x轴坐标
-        for(int i = 1;i<13;i++){
-            xVals.add("第"+i+"次");
-        }
-
 
 //        BarData data3 = new BarData(xVals, dataSets);
-        barChart.setData(data);
+        mChart.setData(data);
 
-        data.setBarWidth(barWidth);
-        barChart.setData(data);//装载数据
-        barChart.groupBars(0f, groupSpace, barSpace);
-        barChart.invalidate();//刷新
+        // specify the width each bar should have
+        mChart.getBarData().setBarWidth(barWidth);
+        // restrict the x-axis range
+        mChart.getXAxis().setAxisMinimum(0);
+        mChart.getXAxis().setAxisMaximum(6);
+        mChart.setData(data);//装载数据
+        mChart.groupBars(0, groupSpace, barSpace);
+        mChart.invalidate();//刷新
     }
 }

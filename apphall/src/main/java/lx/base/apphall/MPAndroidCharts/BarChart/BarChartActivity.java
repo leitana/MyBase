@@ -30,7 +30,12 @@ public class BarChartActivity extends BaseActionBarActivity {
     @BindView(R.id.bar_chart)
     BarChart mChart;
     private View mRootView;
-//    private List<BarBeans> mDatas;
+    //    private List<BarBeans> mDatas;
+    private String[] areaName = new String[]{
+            "成都", "绵阳", "乐山", "峨眉", "泸州", "南充", "九寨沟", "攀枝花", "甘孜",
+            "成都", "绵阳", "乐山", "峨眉", "泸州", "南充", "九寨沟", "攀枝花", "甘孜",
+            "成都", "绵阳", "乐山", "峨眉", "buchong"
+    };
 
     @Override
     protected View setMyContentView() {
@@ -70,7 +75,7 @@ public class BarChartActivity extends BaseActionBarActivity {
         mChart.getAxisRight().setEnabled(false);
 //        mChart.getAxisLeft().setEnabled(false);
 
-        Description description=new Description();
+        Description description = new Description();
         description.setText("表的描述信息");
         mChart.setDescription(description);  //表的描述信息
 
@@ -82,7 +87,7 @@ public class BarChartActivity extends BaseActionBarActivity {
         xAxis.setTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf"));//字体的相关的设置
         xAxis.setGranularity(1f);//设置最小间隔，防止当放大时，出现重复标签。
 //        xAxis.setCenterAxisLabels(true);//字体下面的标签 显示在每个直方图的中间(分组直方图中间)
-        xAxis.setLabelCount(23,false);//一个界面显示22个Lable。那么这里要设置11个
+        xAxis.setLabelCount(23, false);//一个界面显示22个Lable。那么这里要设置11个
         xAxis.setTextSize(10f);
         xAxis.setXOffset(0);
         xAxis.setValueFormatter(new MyXFormatter());
@@ -113,20 +118,21 @@ public class BarChartActivity extends BaseActionBarActivity {
         l.setTextSize(11f);
         l.setXEntrySpace(4f);
 
-        CustomMarkerView markerView = new CustomMarkerView(BarChartActivity.this, R.layout.custom_marker_view);
+        CustomMarkerView markerView = new CustomMarkerView(BarChartActivity.this, R.layout.custom_marker_view, areaName);
         markerView.setChartView(mChart); // For bounds control
         mChart.setMarker(markerView); // Set the marker to the chart
 
         setData();
 
         //使柱状图可以左右显示
-        Matrix mMatrix=new Matrix();
+        Matrix mMatrix = new Matrix();
         mMatrix.postScale(1.5f, 1f);//两个参数分别是x,y轴的缩放比例。例如：将x轴的数据放大为之前的1.5倍
         mChart.getViewPortHandler().refresh(mMatrix, mChart, false);//将图表动画显示之前进行缩放
 //        mChart.animateX(1000); // 立即执行的动画,x轴
         mChart.animateY(800);
         mChart.moveViewToX(4);
     }
+
     private void setData() {
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
         for (int i = 0; i < 22; i++) {
