@@ -33,7 +33,7 @@ public class CustomMarkerView extends MarkerView {
     // content (user-interface)
     @Override
     public void refreshContent(Entry e, Highlight highlight) {
-        tvContent.setText(areaName[(int)e.getX()] + "--" + e.getY() + "--" + e.getData());
+        tvContent.setText(areaName[(int)e.getX()] + "--" + e.getX()+ "--" + e.getY() + "--" + e.getData());
         super.refreshContent(e, highlight);
     }
 

@@ -20,8 +20,17 @@ public class PicassoImageLoader implements ImageLoader{
     public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
         Glide.with(activity)//
                 .load(new File(path))//
-                .placeholder(R.mipmap.default_image)//
-                .error(R.mipmap.default_image)//
+                .placeholder(R.mipmap.ic_load)//
+                .error(R.mipmap.ic_load)//
+                .into(imageView);
+    }
+
+    @Override
+    public void displayImagePreview(Activity activity, String path, ImageView imageView, int width, int height) {
+        Glide.with(activity)//
+                .load(new File(path))//
+                .placeholder(R.mipmap.ic_load)//
+                .error(R.mipmap.ic_load)//
                 .into(imageView);
     }
 

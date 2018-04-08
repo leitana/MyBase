@@ -117,9 +117,9 @@ public class MultipleBarChartActivity extends BaseActionBarActivity {
     }
 
     public void show() {
-        float groupSpace = 0.08f;
-        float barSpace = 0.03f; // x4 DataSet
-        float barWidth = 0.2f; // x4 DataSet
+        float groupSpace = 0.08f;//0.08
+        float barSpace = 0.00f; // x4 DataSet 0.03
+        float barWidth = 0.23f; // x4 DataSet 0.2
         // (0.2 + 0.03) * 4 + 0.08 = 1.00 -> interval per "group"
 
         set1 = new BarDataSet(yVals1, "Company A");

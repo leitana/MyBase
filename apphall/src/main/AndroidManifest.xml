@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.READ_SMS"></uses-permission>
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/iron_man"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -64,6 +64,9 @@
         <activity android:name=".MPAndroidCharts.MPAndroidActivity"/>
         <activity android:name=".MPAndroidCharts.BarChart.BarChartActivity" />
         <activity android:name=".MPAndroidCharts.MultipleBar.MultipleBarChartActivity" />
+        <activity android:name=".progress.ProgressTest" />
+        <activity android:name=".design_pattern.bulidpattern.BuildPatternActivity"/>
+        <activity android:name=".design_pattern.strategy_pattern.StrategyActivity"/>
     </application>
 
 </manifest>

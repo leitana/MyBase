@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
+
 import java.util.Random;
 
 import butterknife.BindView;
@@ -13,6 +15,7 @@ import lx.base.apphall.MPAndroidCharts.MPAndroidActivity;
 import lx.base.apphall.canvas.CanvasActivity;
 import lx.base.apphall.custom_view.ViewActivity;
 import lx.base.apphall.custom_view.search_view.SearchViewActivity;
+import lx.base.apphall.design_pattern.strategy_pattern.StrategyActivity;
 import lx.base.apphall.event_bus.event1.EventFirstActvity;
 import lx.base.apphall.fusionCharts.SampleActivity;
 import lx.base.apphall.gridview.GridCheckActivity;
@@ -22,6 +25,7 @@ import lx.base.apphall.login.Splash;
 import lx.base.apphall.permission.PermissionReviewActivity;
 import lx.base.apphall.popwindow.PopWindowActivity;
 import lx.base.apphall.progress.Progress;
+import lx.base.apphall.progress.ProgressTest;
 import lx.base.apphall.qr_code.QrCodeActivity;
 import lx.base.apphall.recyclierview.RecyclerMainActivity;
 import lx.base.apphall.rxjava.RxJavaTestActivity;
@@ -72,6 +76,10 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
     TextView fusionCharts;
     @BindView(R.id.mpAndroidCharts)
     TextView mpAndroidCharts;
+    @BindView(R.id.progress)
+    TextView progressBar;
+    @BindView(R.id.design_pattern)
+    TextView designPattern;
     private View mRootView;
     private int ranColor;
     private TextView grid;
@@ -90,6 +98,7 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
         super.initView();
         hideMyLeftView();
         grid = (TextView) findViewById(R.id.tv_grid);
+        Logger.init();
 //        ranColor = 0xff000000 | mRandom.nextInt(0x00ffffff);
 //        grid.setBackgroundColor(ranColor);
         grid.setOnClickListener(this);
@@ -117,6 +126,8 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
         eventBus.setOnClickListener(this);
         fusionCharts.setOnClickListener(this);
         mpAndroidCharts.setOnClickListener(this);
+        progressBar.setOnClickListener(this);
+        designPattern.setOnClickListener(this);
     }
 
     @Override
@@ -201,10 +212,19 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
                 break;
             case R.id.fusionCharts:
                 intent.setClass(MainActivity.this, SampleActivity.class);
-                startActivity(intent);
+//                startActivity(intent);
+                showToast("5.0");
                 break;
             case R.id.mpAndroidCharts:
                 intent.setClass(MainActivity.this, MPAndroidActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.progress:
+                intent.setClass(MainActivity.this, ProgressTest.class);
+                startActivity(intent);
+                break;
+            case R.id.design_pattern:
+                intent.setClass(MainActivity.this, StrategyActivity.class);
                 startActivity(intent);
                 break;
             default:

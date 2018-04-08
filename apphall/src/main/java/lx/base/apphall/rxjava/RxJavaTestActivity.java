@@ -61,22 +61,19 @@ public class RxJavaTestActivity extends BaseActionBarActivity {
     }
 
     private void getPic() {
-        Observable.create(new Observable.OnSubscribe<List<String>>() {
-            @Override
-            public void call(Subscriber<? super List<String>> subscriber) {
-                File file = new File(path);
-                File[] subFile = file.listFiles();
-                for (int iFileLength = 0; iFileLength < subFile.length; iFileLength++) {
-                    if (!subFile[iFileLength].isDirectory()) {
-                        String filename = subFile[iFileLength].getName();
-                        if (filename.trim().toLowerCase().endsWith(".jpg")) {
-                            mData.add(path + filename);
-                        }
+        Observable.create((Observable.OnSubscribe<List<String>>) subscriber -> {
+            File file = new File(path);
+            File[] subFile = file.listFiles();
+            for (int iFileLength = 0; iFileLength < subFile.length; iFileLength++) {
+                if (!subFile[iFileLength].isDirectory()) {
+                    String filename = subFile[iFileLength].getName();
+                    if (filename.trim().toLowerCase().endsWith(".jpg")) {
+                        mData.add(path + filename);
                     }
                 }
-                subscriber.onNext(mData);
-                subscriber.onCompleted();
             }
+            subscriber.onNext(mData);
+            subscriber.onCompleted();
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<String>>() {
