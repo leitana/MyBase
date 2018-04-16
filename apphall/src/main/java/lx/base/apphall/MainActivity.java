@@ -15,7 +15,7 @@ import lx.base.apphall.MPAndroidCharts.MPAndroidActivity;
 import lx.base.apphall.canvas.CanvasActivity;
 import lx.base.apphall.custom_view.ViewActivity;
 import lx.base.apphall.custom_view.search_view.SearchViewActivity;
-import lx.base.apphall.design_pattern.strategy_pattern.StrategyActivity;
+import lx.base.apphall.design_pattern.factory_pattern.FactoryActivity;
 import lx.base.apphall.event_bus.event1.EventFirstActvity;
 import lx.base.apphall.fusionCharts.SampleActivity;
 import lx.base.apphall.gridview.GridCheckActivity;
@@ -224,7 +224,7 @@ public class MainActivity extends BaseActionBarActivity implements View.OnClickL
                 startActivity(intent);
                 break;
             case R.id.design_pattern:
-                intent.setClass(MainActivity.this, StrategyActivity.class);
+                intent.setClass(MainActivity.this, FactoryActivity.class);
                 startActivity(intent);
                 break;
             default:

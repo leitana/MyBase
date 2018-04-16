@@ -67,6 +67,7 @@
         <activity android:name=".progress.ProgressTest" />
         <activity android:name=".design_pattern.bulidpattern.BuildPatternActivity"/>
         <activity android:name=".design_pattern.strategy_pattern.StrategyActivity"/>
+        <activity android:name=".design_pattern.factory_pattern.FactoryActivity"/>
     </application>
 
 </manifest>
